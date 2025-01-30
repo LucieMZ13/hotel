@@ -62,5 +62,9 @@ public class Booking {
     public void setGuest(List<Guest> guest) {
         this.guest = guest;
     }
+    public int getGuestsCount() {
+        return guest.size();
+
+    }
 
 }
