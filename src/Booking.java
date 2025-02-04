@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -66,5 +67,26 @@ public class Booking {
         return guest.size();
 
     }
+    public int getBookingLenght() {
+        return reservationFrom.until(reservationTo).getDays();
+    }
 
+    public BigDecimal getTotalPrice() {
+        return room.getPrice().multiply(BigDecimal.valueOf(getBookingLenght()));
+    }
+    public String getFormattedSummary() {
+        Guest guest = getMainGuest();
+        return reservationFrom+" až "+reservationTo+": "+guest.getFirstName()+
+                " "+guest.getLastName()+" ("+guest.getDateOfBirth()+") "+
+                " ["+getGuestsCount()+", "+(getRoom().isHasViewOfSea()?"ano":"ne")
+                +"] za "+getTotalPrice()+" Kč";
+    }
+    public String getDescription() {
+        Guest guest = getMainGuest();
+        String result = "Rezervace pro: " +
+                guest.getDescription() + " na pokoj: " + room.getRoomNumber() + " termín: " +
+                reservationFrom + " - " + reservationTo + " pracovní pobyt "
+                + (isVacation ? "ne" : "ano");
+    return result;
+    }
 }

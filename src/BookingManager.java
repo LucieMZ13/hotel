@@ -44,13 +44,32 @@ public class BookingManager {
 
     public List<Booking> getTopNHolidayBookings(int n) {
         List<Booking> vacationBookings = new ArrayList<>();
-                for (int i = 0; vacationBookings.size() <= n; i++) {
-                    for (Booking booking : bookingList) {
-                        if (booking.isVacation()) {
-                            vacationBookings.add(booking);
-                        }
+        for (int i = 0; vacationBookings.size() <= n; i++) {
+            for (Booking booking : bookingList) {
+                if (booking.isVacation()) {
+                    vacationBookings.add(booking);
                 }
             }
+        }
         return vacationBookings;
+    }
+
+    public void printGuestStatistics() {
+        int oneGuest = 0, twoGuests = 0, moreGuests = 0;
+        for (Booking booking : bookingList) {
+            switch (booking.getGuestsCount()) {
+                case 1:
+                    oneGuest++;
+                    break;
+                case 2:
+                    twoGuests++;
+                    break;
+                default:
+                    moreGuests++;
+            }
+        }
+        System.out.println("Počet rezervací s jedním hostem: " + oneGuest);
+        System.out.println("Počet rezervací se dvěma hosty: " + twoGuests);
+        System.out.println("Počet rezervací s více hosty: " + moreGuests);
     }
 }
